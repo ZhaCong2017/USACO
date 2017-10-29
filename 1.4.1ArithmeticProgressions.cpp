@@ -10,6 +10,7 @@ LANG:C++
 #include<map>
 #include<vector>
 #include<algorithm>
+#include<set>
 using namespace std;
 bool noanswer = true;
 bool *hashed;
@@ -20,25 +21,25 @@ int main()
 	int n, m, x;
 	fscanf(fin, "%d%d", &n, &m);
 	hashed = new bool[m * m * 2]();
-	map<int, int> bisquares;
+	set<int> bisquares;
 	map<int, vector<int> > result;
 	for (int i = 0; i <= m; i++)
 	{
 		for (int j = i; j <= m; j++)
 		{
 			x = i * i + j * j;
-			bisquares[x] = 1;
+			bisquares.insert(x);
 			hashed[x] = true;
 		}
 	}
 	int max = m * m + m * m;
-	for (map<int, int> ::iterator iter = bisquares.begin(); iter != bisquares.end(); iter++)
+	for (set<int> ::iterator iter = bisquares.begin(); iter != bisquares.end(); iter++)
 	{
-		map<int, int> ::iterator i = iter;
+		set<int> ::iterator i = iter;
 		for (i++; i != bisquares.end(); i++)
 		{
-			int t = 2, now = i->first;
-			int dis = now - iter->first;
+			int t = 2, now = *i;
+			int dis = now - *iter;
 			if (now + dis * (n - 2) > max)
 				break;
 			bool isbisquares = true;
@@ -54,7 +55,7 @@ int main()
 			if (isbisquares)
 			{
 				noanswer = false;
-				result[dis].push_back(iter->first);
+				result[dis].push_back(*iter);
 			}
 		}
 	}
