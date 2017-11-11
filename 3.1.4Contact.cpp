@@ -14,14 +14,6 @@ using namespace std;
 map<string, int> coun;
 int a, b, n;
 
-int getnum(string s)
-{
-	int result = 0;
-	for (int i = 0; i < s.length(); i++)
-		result = result * 2 + s[i] - '0';
-	return result;
-}
-
 int main()
 {
 	ifstream fin("contact.in");
@@ -48,10 +40,7 @@ int main()
 	map<int, map<int, set<string> > > result;
 	int t;
 	for (map<string, int> ::iterator iter = coun.begin(); iter != coun.end(); iter++)
-	{
-		t = getnum(iter->first);
 		result[iter->second][iter->first.length()].insert(iter->first);
-	}
 
 	map<int, vector<string> > output;
 	t = 0;
