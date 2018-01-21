@@ -84,9 +84,9 @@ int main()
 			fin >> k;
 			prefer[i][k + n] = 1;
 		}
-		for (int j = 1; j <= m; j++)
-			prefer[j + n][t] = 1;
 	}
+	for (int j = 1; j <= m; j++)
+		prefer[j + n][t] = 1;
 	fout << maxflow(s, t) << endl;
 
 	//system("pause");
